@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
 const connectDB = require('./src/config/db');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 connectDB();
 
@@ -17,7 +17,11 @@ app.use('/api/transactions', require('./src/routes/transactionRoutes'));
 app.use('/api/accounts', require('./src/routes/accountRoutes'));
 
 app.get('/', (req, res) => {
-    res.status(200).json({ status: 'success', message: 'Money Manager API is healthy' });
+    res.status(200).json({ status: 'success', message: 'Money Manage is running' });
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'success', message: 'Money Manage is running' });
 });
 
 app.use((req, res, next) => {
